@@ -1,0 +1,38 @@
+{
+    "name": "jlorente/laravel-esendex",
+    "description": "Laravel 5.6 integration for the Esendex SDK.",
+    "keywords": [
+        "php",
+        "jlorente",
+        "laravel",
+        "esendex"
+    ],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "José Lorente",
+            "email": "jose.lorente.martin@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.3",
+        "illuminate/support": "5.6.*",
+        "esendex/sdk": "2.*.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jlorente\\Laravel\\Esendex\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jlorente\\Laravel\\Esendex\\EsendexServiceProvider"
+            ],
+            "aliases": {
+                "Esendex": "Jlorente\\Laravel\\Esendex\\Facades\\Esendex"
+            }
+        }
+    },
+    "minimum-stability": "stable"
+}
