@@ -38,13 +38,6 @@ class Esendex
     protected $config;
 
     /**
-     * The amount converter class and method name.
-     *
-     * @var string
-     */
-    protected static $amountConverter = '\\Jlorente\\Appsflyer\\AmountConverter::convert';
-
-    /**
      * 
      * @param IAuthentication $config
      */
