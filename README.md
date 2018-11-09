@@ -59,9 +59,11 @@ config/services.php
 return [
     //other stuff
     'esendex' => [
-        'reference' => 'YOUR ACCOUNT REFERENCE',
-        'username' => 'YOUR ACCOUNT USERNAME',
-        'password' => 'YOUR ACCOUNT PASSWORD',
+        'reference' => '', // your account reference
+        'username' => '', // your account username
+        'password' => '', // your account password
+        'default_from' => 'Laravel', // optional name of the sender
+        'dry_run' => false, // only for the notification channel, if true, no sms's will be sent
     ];
 ];
 ```
@@ -121,6 +123,59 @@ of the notification:
 public function via($notifiable)
 {
     return [EsendexSmsChannel::class];
+}
+```
+
+### Customizing The Name of the Sender
+
+If you would like to send some notifications with a sender name that is 
+different from the one specified in your config/services.php file, you may use 
+the from method on a EsendexMessage instance:
+
+```php
+/**
+ * Get the Esendex / SMS representation of the notification.
+ *
+ * @param  mixed  $notifiable
+ * @return \Jlorente\Laravel\Esendex\Notifications\Messages\EsendexMessage|string
+ */
+public function toEsendex($notifiable)
+{
+    return (new EsendexMessage)
+                ->content('Your SMS message content')
+                ->from('Popilio');
+}
+```
+
+### Routing the Notifications
+
+When sending notifications via the esendex channel, the notification system will 
+automatically look for a phone_number attribute on the notifiable entity. If 
+you would like to customize the phone number the notification is delivered to, 
+define a routeNotificationForEsendex method on the entity:
+
+```php
+<?php
+
+namespace App;
+
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use Notifiable;
+
+    /**
+     * Route notifications for the Esendex channel.
+     *
+     * @param  \Illuminate\Notifications\Notification  $notification
+     * @return string
+     */
+    public function routeNotificationForEsendex($notification)
+    {
+        return $this->phone;
+    }
 }
 ```
 

@@ -36,7 +36,7 @@ class EsendexSmsChannel
 {
 
     /**
-     * The Nexmo client instance.
+     * The Esendex client instance.
      *
      * @var Esendex
      */
@@ -73,11 +73,11 @@ class EsendexSmsChannel
         if (is_string($message)) {
             $message = new EsendexMessage($message);
         }
-        if (config('services.esendex.dry_run') === true) {
+        if (config('services.esendex.dry_run', false) === true) {
             return true;
         } else {
             return $this->client->dispatchService(new DispatchMessage(
-                            $message->from ?? config('services.esendex.default_from')
+                            $message->from ?? config('services.esendex.default_from', 'Laravel')
                             , $to
                             , trim($message->content)
                             , Message::SmsType
