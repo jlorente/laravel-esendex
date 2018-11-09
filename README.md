@@ -179,7 +179,7 @@ class User extends Authenticatable
 }
 ```
 
-You can find more info about Laravel notification in [this page](https://laravel.com/docs/5.6/notifications).
+You can find more info about Laravel notifications in [this page](https://laravel.com/docs/5.6/notifications).
 
 ## License 
 
