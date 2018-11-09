@@ -64,7 +64,6 @@ class EsendexServiceProvider extends ServiceProvider
                     , $config['password'] ?? null
             ));
         });
-        //$this->app->alias('esendex', Esendex::class);
     }
 
     /**
