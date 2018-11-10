@@ -76,7 +76,7 @@ class EsendexSmsChannel
         if (config('services.esendex.dry_run', false) === true) {
             return true;
         } else {
-            return $this->client->dispatchService(new DispatchMessage(
+            return $this->client->dispatchService()->send(new DispatchMessage(
                             $message->from ?? config('services.esendex.default_from', 'Laravel')
                             , $to
                             , trim($message->content)
