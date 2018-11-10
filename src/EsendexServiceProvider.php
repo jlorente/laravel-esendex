@@ -74,6 +74,7 @@ class EsendexServiceProvider extends ServiceProvider
     {
         return [
             'esendex'
+            , Esendex::class
         ];
     }
 
