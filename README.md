@@ -1,6 +1,6 @@
 Esendex SDK integration for Laravel
 ===================================
-Laravel 5.6 integration for the Esendex SDK including a notification channel.
+Laravel integration for the Esendex SDK including a notification channel.
 
 ## Installation
 
