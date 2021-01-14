@@ -21,7 +21,9 @@ namespace Jlorente\Laravel\Esendex\Notifications\Channel;
 
 use Esendex\Model\DispatchMessage;
 use Esendex\Model\Message;
+use Exception;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
 use Jlorente\Laravel\Esendex\Esendex;
 use Jlorente\Laravel\Esendex\Notifications\Messages\EsendexMessage;
 
@@ -73,15 +75,26 @@ class EsendexSmsChannel
         if (is_string($message)) {
             $message = new EsendexMessage($message);
         }
+
         if (config('services.esendex.dry_run', false) === true) {
             return true;
-        } else {
+        }
+
+        try {
             return $this->client->dispatchService()->send(new DispatchMessage(
-                            $message->from ?? config('services.esendex.default_from', 'Laravel')
-                            , $to
-                            , trim($message->content)
-                            , Message::SmsType
+                                    $message->from ?? config('services.esendex.default_from', 'Laravel')
+                                    , $to
+                                    , trim($message->content)
+                                    , Message::SmsType
             ));
+        } catch (Exception $ex) {
+            Log::critical('Esendex API Exception ', $ex->getMessage());
+
+            if (config('services.esendex.throw_exception_on_error', true)) {
+                throw $ex;
+            }
+
+            return false;
         }
     }
 

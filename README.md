@@ -64,6 +64,7 @@ return [
         'password' => '', // your account password
         'default_from' => 'Laravel', // optional name of the sender
         'dry_run' => false, // only for the notification channel, if true, no sms's will be sent
+        'throw_exception_on_error' => true // This will throw up the Esendex sdk exception if an exception is thrown by the dispatchService on the EsendexSmsChannel
     ];
 ];
 ```
