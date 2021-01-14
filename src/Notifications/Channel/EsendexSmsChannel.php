@@ -88,7 +88,7 @@ class EsendexSmsChannel
                                     , Message::SmsType
             ));
         } catch (Exception $ex) {
-            Log::critical('Esendex API Exception ', $ex->getMessage());
+            Log::critical('Esendex API Exception ', ['message' => $ex->getMessage()]);
 
             if (config('services.esendex.throw_exception_on_error', true)) {
                 throw $ex;
