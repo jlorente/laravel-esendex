@@ -15,9 +15,9 @@
         }
     ],
     "require": {
-        "php": ">=7.1.3",
+        "php": ">=7.3",
         "illuminate/support": ">=5.5",
-        "esendex/sdk": "2.*.*"
+        "esendex/sdk": "^3.0"
     },
     "autoload": {
         "psr-4": {
